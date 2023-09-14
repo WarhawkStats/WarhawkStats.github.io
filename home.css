@@ -12,3 +12,9 @@
   width: 200px;
   object-fit: cover;
 }
+@media(max-width: 1200px) {
+  .home-image {
+    width: 919px;
+    height: 748px;
+  }
+}
