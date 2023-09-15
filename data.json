@@ -8,6 +8,15 @@
       "kdr": 1.2,
       "flagcaptures": 2,
       "gamesplayed": 3
+    },
+	{
+      "username": "GreenTie2",
+      "points": 4,
+      "kills": 2,
+      "deaths": 3,
+      "kdr": 1.2,
+      "flagcaptures": 2,
+      "gamesplayed": 3
     }
   ],
   "date" : "9/14/2023"
