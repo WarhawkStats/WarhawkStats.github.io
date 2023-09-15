@@ -1,10 +1,24 @@
-<div>
-  <link href="./home.css" rel="stylesheet" />
-  <div class="home-container">
-    <img
-      src="https://media.istockphoto.com/id/1367357589/photo/red-heart-shaped-sky-at-sunset-beautiful-landscape-with-flowers-love-background-with-copy.jpg?s=1024x1024&amp;w=is&amp;k=20&amp;c=yzVsrvDr8Xgc68nXUmh8RpQ8iu_O8Qplmfat-sfLah8="
-      alt="image"
-      class="home-image"
-    />
-  </div>
-</div>
+<!DOCTYPE html>
+<html>
+<body>
+   <h2>JavaScript HTML DOM</h2>
+   <p>How to add a new element to HTML DOM</p>
+   <div id="div1">
+      <p id="p1">Introduction.</p>
+      <p id="p2">Conclusion.</p>
+   </div>
+   <script>
+      const para = document.createElement("p");
+      const node = document.createTextNode("To begin with...");
+      para.appendChild(node);
+      const element = document.getElementById("div1");
+      const child = document.getElementById("p2");
+      element.insertBefore(para,child);
+	  
+	  
+	  fetch('./data.json')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+   </script>
+</body>
+</html>
