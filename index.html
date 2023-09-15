@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
+   <head>
+      <title>GreenTie's Warhawk Stats</title>
+      <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    </head>
 
 <body>
-   <img src="./img/greentiestats.png">
 
-   <p>This is a work in progress. Play on "GreenTie's" Warhawk Server to accumulate stats here.</p>
    <div id="div1">
+      <img src="./img/greentiestats.png">
 
+      <p>This is a work in progress. Play on "GreenTie's" Warhawk Server to accumulate stats here.</p>
 
 
       <p id="lblLastUpdated">Last Updated:</p>
-
+      <p id="lblTotalGames">Total Games Recorded:</p>
 
 
       <style type="text/css">
@@ -79,9 +83,14 @@
          console.log(data)
 
          let lblLastUpdated = document.getElementById("lblLastUpdated");
-         lblLastUpdated.innerText = "Last Updated: " + data.date;
+         lblLastUpdated.innerText = "Last Updated (Arizona Time) : " + data.date;
 
-         for (let i = 0; i < data.players.length; i++) {
+         let lblTotalGames = document.getElementById("lblTotalGames");
+         lblTotalGames.innerText = "Total Games Recorded : " + data.updateCount;
+
+
+
+         for (let i = 0; i < data.playerList.length; i++) {
             //text += cars[i] + "<br>";
             //alert(data.players[i].username);
             let table = document.getElementById("statdatatable");
@@ -99,13 +108,13 @@
             let c7 = document.createElement("td")
 
             // Insert data to cells
-            c1.innerText = data.players[i].username
-            c2.innerText = data.players[i].points
-            c3.innerText = data.players[i].kills
-            c4.innerText = data.players[i].deaths
-            c5.innerText = data.players[i].kdr
-            c6.innerText = data.players[i].flagcaptures
-            c7.innerText = data.players[i].gamesplayed
+            c1.innerText = data.playerList[i].name
+            c2.innerText = data.playerList[i].points
+            c3.innerText = data.playerList[i].kills
+            c4.innerText = data.playerList[i].deaths
+            c5.innerText = (data.playerList[i].kills/data.playerList[i].deaths).toFixed(2);
+            c6.innerText = data.playerList[i].flags
+            c7.innerText = data.playerList[i].games
 
             // Append cells to row
             row.appendChild(c1);
