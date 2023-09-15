@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-   <h2>JavaScript HTML DOM</h2>
-   <p>How to add a new element to HTML DOM</p>
+   <img src="./img/warhawk2.png">
+  
+   <p>This is a work in progress. Play on "GreenTie's" Warhawk Server to accumulate stats here.</p>
    <div id="div1">
       <p id="p1">Introduction.</p>
       <p id="p2">Conclusion.</p>
+
+     
+
+
+      <style type="text/css">
+         .tg  {border-collapse:collapse;border-spacing:0;}
+         .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+           overflow:hidden;padding:10px 5px;word-break:normal;}
+         .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+           font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+         .tg .tg-0lax{text-align:left;vertical-align:top}
+
+         body {
+         background-color: #b8c8ba;
+       }
+         </style>
+
+      <table id ="statdata" class="tg">
+         <tr>
+           <th>Name</th>
+           <th>Points</th>
+           <th>Kills</th>
+           <th>Deaths</th>
+           <th>KDR</th>
+           <th>Flag Captures</th>
+           <th>Games Played</th>
+         </tr>
+         <tr>
+           <td>Test</td>
+           <td>12345</td>
+           <td>23</td>
+           <td>14</td>
+           <td>2.6</td>
+           <td>2</td>
+           <td>3</td>
+         </tr>
+         <tr>
+            <td>Test</td>
+            <td>12345</td>
+            <td>23</td>
+            <td>14</td>
+            <td>2.6</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+       </table>
+
    </div>
    <script>
       const para = document.createElement("p");
@@ -13,12 +62,41 @@
       para.appendChild(node);
       const element = document.getElementById("div1");
       const child = document.getElementById("p2");
-      element.insertBefore(para,child);
-	  
-	  
-	  fetch('./data.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+      element.insertBefore(para, child);
+
+      //fetch('./data.json')
+      //.then((response) => response.json())
+      //.then((json) => console.log(json));
+
+      //fetch('./data.json')
+      // .then((response) => response.json())
+      // .then((json) => jsonData = json);
+
+
+
+      //fetch function
+      fetch('./data.json').then(function (u) { return u.json(); }).then(
+         function (json) {
+            data_function(json); //calling and passing json to another function data_function
+         }
+      )
+      //another functions
+      function data_function(data) {
+         //alert(data.length);
+         console.log(data)
+
+         for (let i = 0; i < data.players.length; i++) {
+            //text += cars[i] + "<br>";
+            //alert(data.players[i].username);
+         }
+      }
+
+      //console.log({ data })
+
+
+      //console.log(jsonData);
+
    </script>
 </body>
+
 </html>

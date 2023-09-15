@@ -1,17 +1,14 @@
 {
-  "start": {
-    "count": "5",
-    "title": "start",
-    "priorities": [{
-      "txt": "Work"
-    }, {
-      "txt": "Time Sense"
-    }, {
-      "txt": "Dicipline"
-    }, {
-      "txt": "Confidence"
-    }, {
-      "txt": "CrossFunctional"
-    }]
-  }
+  "players": [
+    {
+      "username": "GreenTie",
+      "points": 23,
+      "kills": 12,
+      "deaths": 3,
+      "kdr": 1.2,
+      "flagcaptures": 2,
+      "gamesplayed": 3
+    }
+  ],
+  "date" : "9/14/2023"
 }
