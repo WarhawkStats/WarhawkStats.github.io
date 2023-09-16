@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>GreenTie's Warhawk Stats</title>
-      <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-      <meta http-equiv="Pragma" content="no-cache"/>
-      <meta http-equiv="Expires" content="0"/>
-    </head>
+
+<head>
+   <title>GreenTie's Warhawk Stats</title>
+   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   <meta http-equiv="Pragma" content="no-cache" />
+   <meta http-equiv="Expires" content="0" />
+</head>
 
 <body>
 
@@ -61,31 +62,37 @@
 
       <table id="statdatatable" class="tg">
          <tr>
-            <th>Name</th>
-            <th>Points</th>
-            <th>Kills</th>
-            <th>Deaths</th>
-            <th>KDR</th>
-            <th>Flag Captures</th>
-            <th>Games Played</th>
+            <th>#</th>
+            <th><a href='javascript:void(0);' onclick='filterby("name");'>Name</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("points");'>Points</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("kills");'>Kills</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("deaths");'>Deaths</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("kdr")'>KDR</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("flags");'>Flags/Cores</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("games");'>Games Played</a></th>
          </tr>
       </table>
 
    </div>
+
+
    <script>
 
       //fetch function
       let randomNum = Math.floor(Math.random() * 1000);
 
-      fetch('./data.json?'+ randomNum.toString()).then(function (u) { return u.json(); }).then(
+      fetch('./data.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
          function (json) {
-            data_function(json); //calling and passing json to another function data_function
+            data_function(json, "points"); //calling and passing json to another function data_function
          }
       )
+      var sharedata
       //another functions
-      function data_function(data) {
+      function data_function(data, sortType) {
          //alert(data.length);
-         console.log(data)
+         //console.log(data)
+
+         sharedata = data
 
          let lblLastUpdated = document.getElementById("lblLastUpdated");
          lblLastUpdated.innerText = "Last Updated (Arizona Time) : " + data.date;
@@ -93,12 +100,80 @@
          let lblTotalGames = document.getElementById("lblTotalGames");
          lblTotalGames.innerText = "Total Games Recorded : " + data.updateCount;
 
+         if(sortType == "points") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.points > b.points) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "name") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.name < b.name) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "kills") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.kills > b.kills) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "deaths") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.deaths > b.deaths) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "kdr") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.kdr > b.kdr) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "flags") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.flags > b.flags) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "games") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.games > b.games) {
+               return -1;
+            }
+         });
+         }
+
+
+
+
+         var elmtTable = document.getElementById('statdatatable');
+         var tableRows = elmtTable.getElementsByTagName('tr');
+         var rowCount = tableRows.length;
+
+         for (var x = rowCount - 1; x > 0; x--) {
+            elmtTable.removeChild(tableRows[x]);
+         }
+
 
 
          for (let i = 0; i < data.playerList.length; i++) {
             //text += cars[i] + "<br>";
             //alert(data.players[i].username);
             let table = document.getElementById("statdatatable");
+
+
+
+
+
+
+            //table.innerHTML = ""
             //console.log(table)
             // Create row element
             let row = document.createElement("tr")
@@ -106,6 +181,7 @@
             //location.reload();
 
             // Create cells
+            let c0 = document.createElement("td")
             let c1 = document.createElement("td")
             let c2 = document.createElement("td")
             let c3 = document.createElement("td")
@@ -115,15 +191,17 @@
             let c7 = document.createElement("td")
 
             // Insert data to cells
+            c0.innerText = i + 1
             c1.innerText = data.playerList[i].name
             c2.innerText = data.playerList[i].points
             c3.innerText = data.playerList[i].kills
             c4.innerText = data.playerList[i].deaths
-            c5.innerText = (data.playerList[i].kills/data.playerList[i].deaths).toFixed(2);
+            c5.innerText = (data.playerList[i].kills / data.playerList[i].deaths).toFixed(2);
             c6.innerText = data.playerList[i].flags
             c7.innerText = data.playerList[i].games
 
             // Append cells to row
+            row.appendChild(c0);
             row.appendChild(c1);
             row.appendChild(c2);
             row.appendChild(c3);
@@ -134,6 +212,8 @@
 
             // Append row to table body
             table.appendChild(row)
+
+
          }
       }
 
@@ -142,7 +222,22 @@
 
       //console.log(jsonData);
 
+
+      function filterby(thing) {
+
+         data_function(sharedata, thing)
+
+         // location.reload()
+      }
+
+
+
+
    </script>
+
+
+
+
 </body>
 
 </html>
