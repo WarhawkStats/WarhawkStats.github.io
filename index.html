@@ -14,8 +14,9 @@
    <div id="div1">
       <img src="./img/greentiestats.png">
 
-      <p>This is a work in progress. Play on "GreenTie's" Warhawk Server to accumulate stats here.</p>
-
+      <h1>This is a work in progress.</h1> 
+      <h1>Play on "GreenTie's" Warhawk Server to accumulate stats here.</h1>
+      <h1>Stats have been reset due to a scoring bug (September 23rd).</h1>
 
       <p id="lblLastUpdated">Last Updated:</p>
       <p id="lblTotalGames">Total Games Recorded:</p>
@@ -196,7 +197,19 @@
             c2.innerText = data.playerList[i].points
             c3.innerText = data.playerList[i].kills
             c4.innerText = data.playerList[i].deaths
-            c5.innerText = (data.playerList[i].kills / data.playerList[i].deaths).toFixed(2);
+
+            if(data.playerList[i].kills == 0){
+               c5.innerText = 0;
+            }
+            else if(data.playerList[i].deaths == 0){
+               c5.innerText = data.playerList[i].kills + ".00";
+            }
+            else{
+               c5.innerText = (data.playerList[i].kills / data.playerList[i].deaths).toFixed(2);
+            }
+
+
+
             c6.innerText = data.playerList[i].flags
             c7.innerText = data.playerList[i].games
 
